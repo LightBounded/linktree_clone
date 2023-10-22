@@ -14,17 +14,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model Link {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String?
+  url       String
+  icon      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  createdBy   User   @relation(fields: [createdById], references: [id])
-  createdById String
-
-  @@index([name])
 }
+
+// model Post {
+//   id        Int      @id @default(autoincrement())
+//   name      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   createdBy   User   @relation(fields: [createdById], references: [id])
+//   createdById String
+
+//   @@index([name])
+// }
 
 // Necessary for Next auth
 model Account {
@@ -61,7 +70,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]
+  // posts         Post[]
 }
 
 model VerificationToken {
